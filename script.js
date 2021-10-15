@@ -161,9 +161,32 @@ const superheroesWeightMarvel = superheroes.filter((item) => {
 console.log(superheroesWeightMarvel);
 
 // Zoek de zwaarste superheld
-const findHeaviestSuperhero = superheroes.map((item) => {
-  return item.weight  
-}).filter(item => {
-    return item.weight == "1400";
-})
-console.log(findHeaviestSuperhero);
+const allHeroes = superheroes.map(hero => {
+  const weight = hero.weight !== "unknown" ? parseInt(hero.weight) : 0;
+  hero.weight = weight;
+  return hero;
+});
+
+const heaviestHero = allHeroes.reduce(
+  (currentHeaviestHero, currentHero) => {
+    if (currentHero.weight > currentHeaviestHero.weight) {
+      return currentHero;
+    } else {
+      return currentHeaviestHero;
+    }
+  },
+  allHeroes[0]
+  // met deze laatste waarde geef je aan wat de initiele waarde moet zijn van de functie
+);
+
+console.log("Heaviest hero:", heaviestHero);
+
+
+
+// const allHeroes = superheroes.map
+// const findHeaviestSuperhero = superheroes.map((item) => {
+//   return item.weight  
+// }).filter(item => {
+//     return item.weight == "1400";
+// })
+// console.log(findHeaviestSuperhero);
